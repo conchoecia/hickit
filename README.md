@@ -1,8 +1,8 @@
 ## <a name="start"></a>Getting Started
 ```sh
 # Download precompiled binaries for Linux
-curl -L https://github.com/lh3/hickit/releases/download/v0.1/hickit-0.1_x64-linux.tar.bz2 | tar -jxf -
-cd hickit-0.1_x64-linux
+curl -L https://github.com/lh3/hickit/releases/download/v0.1.1/hickit-0.1.1_x64-linux.tar.bz2 | tar -jxf -
+cd hickit-0.1.1_x64-linux
 
 # Map Dip-C reads and extract contacts (skip if you use your own pipeline)
 ./seqtk mergepe read1.fq.gz read2.fq.gz | ./pre-dip-c - | bwa mem -5SP -p hs37d5.fa - | gzip > aln.sam.gz
