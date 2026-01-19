@@ -126,6 +126,9 @@ void hk_pair_image(const struct hk_sdict *d, int32_t n_pairs, const struct hk_pa
 							max_k = k, max = c->cnt[k];
 					x = max >= c->tot * phase_thres? (int)(max * t) : (int)(c->tot * t);
 					if (no_grad || x > 255) x = 255;
+					// Color key for phased contacts (max_k from phase_prob00/01/10/11):
+					// 00 -> red, 01 -> magenta (upper) / cyan (lower), 10 -> cyan (upper) / magenta (lower), 11 -> green.
+					// If below threshold, draw gray (unphased/ambiguous).
 					if (max < c->tot * phase_thres) *p++ = x/2, *p++ = x/2, *p++ = x/2, *q++ = x/2, *q++ = x/2, *q++ = x/2;
 					else if (max_k == 0) *p++ = x, *p++ = 0, *p++ = 0, *q++ = x, *q++ = 0, *q++ = 0;
 					else if (max_k == 1) *p++ = x, *p++ = 0, *p++ = x, *q++ = 0, *q++ = x, *q++ = x;

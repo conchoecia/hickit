@@ -40,6 +40,7 @@ cd hickit-0.1.1_x64-linux
     - [Aligning Hi-C reads](#aln-hic)
     - [Extracting contact pairs](#extract-pairs)
   - [Imputing missing phases (diploid single-cell Hi-C only)](#impute)
+  - [PNG contact maps](#png)
   - [Inferring 3D structures (single-cell only)](#infer-3d)
 * [Related Projects](#related)
 * [Limitations](#limit)
@@ -206,6 +207,25 @@ with each line consists of probability threshold, sensitivity of
 intra-chromosome contacts close to the diagonal, accuracy of such contacts,
 sensitivity of off-diagonal contacts, accuracy of such contacts, sensitivity of
 all contacts and accuracy of all contacts.
+
+### <a name="png"></a>PNG contact maps
+
+`hickit --out-png` renders a whole-genome contact map at the requested image
+width (`-w`). Each pixel bins all contact pairs whose coordinates fall into
+that genomic bin. Chromosome boundaries are drawn as dark gray grid lines, and
+TAD borders are drawn in red if TADs were computed earlier in the same command
+line (e.g. `-T` before `--out-png`).
+
+When phase probability columns (`phase_prob00/01/10/11`) are present, colors
+encode the dominant phase per pixel (subject to `-p` threshold):
+- phase 00: red
+- phase 01: magenta in the upper triangle, cyan in the lower triangle
+- phase 10: cyan in the upper triangle, magenta in the lower triangle
+- phase 11: green
+If the dominant phase is below the threshold, the pixel is gray. If phase
+columns are absent, all pixels are grayscale based on contact count. Use
+`--png-no-dim` to disable intensity gradients so nonzero pixels draw at full
+brightness.
 
 ### <a name="infer-3d"></a>Inferring 3D structures (single-cell only)
 
